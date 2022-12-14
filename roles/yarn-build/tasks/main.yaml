@@ -1,0 +1,9 @@
+- name: yarn
+  args:
+    chdir: "{{ zuul.project.src_dir }}"
+  command: "/usr/local/bin/yarn"
+
+- name: yarn build
+  args:
+    chdir: "{{ zuul.project.src_dir }}"
+  command: "/usr/local/bin/yarn build"
