@@ -23,6 +23,19 @@
         - noop
 
 - project-template:
+    name: wazo-tox-py39
+    description: Project template for tox -e py39
+    check:
+      jobs:
+        - wazo-tox-py39
+    gate:
+      jobs:
+        - wazo-tox-py39
+    auto-merge:
+      jobs:
+        - noop
+
+- project-template:
     name: wazo-tox-linters
     description: Project template for tox -e linters
     check:
@@ -38,6 +51,21 @@
         - noop
 
 - project-template:
+    name: wazo-tox-linters-310
+    description: Project template for tox -e linters in Python 3.10
+    check:
+      jobs:
+        - tox-linters:
+            nodeset: pod-python-310
+    gate:
+      jobs:
+        - tox-linters:
+            nodeset: pod-python-310
+    auto-merge:
+      jobs:
+        - noop
+
+- project-template:
     name: wazo-tox-integration
     description: Project template for tox -e integration
     check:
@@ -46,6 +74,19 @@
     gate:
       jobs:
         - wazo-tox-integration
+    auto-merge:
+      jobs:
+        - noop
+
+- project-template:
+    name: wazo-tox-integration
+    description: Project template for tox -e integration on Python 3.9
+    check:
+      jobs:
+        - wazo-tox-integration-py39
+    gate:
+      jobs:
+        - wazo-tox-integration-py39
     auto-merge:
       jobs:
         - noop
@@ -113,6 +154,19 @@
     gate:
       jobs:
         - debian-packaging
+    auto-merge:
+      jobs:
+        - noop
+
+- project-template:
+    name: debian-packaging-bullseye
+    description: Project template to build Debian packages on Bullseye
+    check:
+      jobs:
+        - debian-packaging-bullseye
+    gate:
+      jobs:
+        - debian-packaging-bullseye
     auto-merge:
       jobs:
         - noop
