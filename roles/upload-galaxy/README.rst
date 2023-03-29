@@ -18,7 +18,7 @@ Upload ansible content to galaxy
      GitHub Username.
 
   .. zuul:rolevar:: api_server
-     :default: The built-in ansible-galaxy default for the development api server.
+     :default: The built-in ansible-galaxy default for the production api server.
 
      The API server destination.
 
