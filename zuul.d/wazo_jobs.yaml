@@ -5,6 +5,6 @@
     parent: base
     timeout: 10800
     run: playbooks/yarn-test/run.yaml
-    nodeset: pod-node-12
+    nodeset: vm-debian-10-m1s
     #openstack2 nodeset config for test job
     # nodeset: vm-ubuntu-10-ubnt1
