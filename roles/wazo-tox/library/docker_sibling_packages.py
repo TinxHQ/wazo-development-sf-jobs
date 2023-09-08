@@ -31,12 +31,11 @@ def main():
     projects = module.params['projects']
     services = module.params['services']
 
-    envdir = '{project_dir}/.tox/{envlist}'.format(
-        project_dir=project_dir, envlist=envlist)
+    envdir = f'{project_dir}/.tox/{envlist}'
     if not os.path.exists(envdir):
         module.exit_json(
             changed=False,
-            msg="envdir does not exist, skipping docker compose customisation"
+            msg="envdir does not exist, skipping docker compose customisation",
         )
     tox_python = f'{envdir}/bin/python'
 
@@ -57,13 +56,16 @@ def main():
 
         package = get_package_name(tox_python, root)
         volumes.add(
-            f"{os.path.realpath(root)}/{package}:/opt/venv/lib/python3.7/site-packages/{package}")
+            f"{os.path.realpath(root)}/{package}:\
+                /opt/venv/lib/python3.7/site-packages/{package}"
+        )
         volumes.add(
-            f"{os.path.realpath(root)}/{package}:/opt/venv/lib/python3.9/site-packages/{package}")
+            f"{os.path.realpath(root)}/{package}:\
+                /opt/venv/lib/python3.9/site-packages/{package}"
+        )
 
     version = '3'
-    compose_file = (
-        f'{project_dir}/integration_tests/assets/docker-compose.yml')
+    compose_file = f'{project_dir}/integration_tests/assets/docker-compose.yml'
     if os.path.exists(compose_file):
         with open(compose_file) as f:
             data = yaml.load(f)
@@ -79,7 +81,8 @@ def main():
     }
 
     docker_compose_override_contents = yaml.dump(docker_compose_override)
-    docker_compose_override_file = f"{project_dir}/docker-compose.integration.override.yaml"
+    docker_compose_override_file = (
+        f"{project_dir}/docker-compose.integration.override.yaml")
 
     with open(docker_compose_override_file, "w") as f:
         f.write(docker_compose_override_contents)
